@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片与文字旋转效果</title>
+    <style>
+        /* 容器样式 */
+        .image-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 50px auto;
+            perspective: 1000px; /* 添加透视效果，增强立体感 */
+        }
+
+        /* 图片样式 */
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s; /* 添加过渡效果，使旋转更平滑 */
+        }
+
+        /* 文字样式 */
+        .image-container p {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            color: white;
+            font-size: 24px;
+            transition: transform 1s; /* 添加过渡效果，使旋转更平滑 */
+        }
+
+        /* 旋转后的图片样式 */
+        .image-container.rotated img {
+            transform: rotate3d(0, 1, 0, -180deg);
+        }
+
+        /* 旋转后的文字样式 */
+        .image-container.rotated p {
+            transform: translate(-50%, -50%) rotate3d(0, 1, 0, 180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 图片容器 -->
+    <div class="image-container">
+        <img src="../微信图片_20240811185159.jpg" alt="示例图片">
+        <p>示例文字</p>
+    </div>
+
+    <script>
+        // 获取所有图片容器元素
+        const imageContainers = document.querySelectorAll('.image-container');
+
+        // 为每个容器元素添加点击事件监听器
+        imageContainers.forEach(container => {
+            container.addEventListener('click', function () {
+                // 切换容器的 rotated 类，以触发旋转效果
+                this.classList.toggle('rotated');
+            });
+        });
+    </script>
+</body>
+
+</html>

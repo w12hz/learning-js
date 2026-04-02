@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ 霓虹登录/注册 - 炫酷主题</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form action="#" id="login-form">
+                <h1>登 录</h1>
+                <div class="social-container">
+                    <a href="#" class="social">F</a>
+                    <a href="#" class="social">G</a>
+                    <a href="#" class="social">L</a>
+                </div>
+                <span>或使用你的账号</span>
+                <input type="email" placeholder="邮箱" required />
+                <input type="password" placeholder="密码" required />
+                <a href="#">忘记密码?</a>
+                <button type="submit">登 录</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-up-container">
+            <form action="#" id="register-form">
+                <h1>注 册</h1>
+                <input type="text" placeholder="用户名" required />
+                <input type="email" placeholder="邮箱" required />
+                <input type="password" placeholder="密码" required />
+                <button type="submit">注 册</button>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>已经有账号了?</h1>
+                    <p>请登录，感受更炫酷的体验！</p>
+                    <button class="ghost" id="signIn">去登录</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>还没有账号?</h1>
+                    <p>输入个人信息，即刻加入我们！</p>
+                    <button class="ghost" id="signUp">去注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<script>
+  const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+// 切换到注册页面
+signUpButton.addEventListener('click', () => {
+    // 添加 CSS class，触发过渡动画
+    container.classList.add("right-panel-active");
+});
+
+// 切换到登录页面
+signInButton.addEventListener('click', () => {
+    // 移除 CSS class，触发过渡动画
+    container.classList.remove("right-panel-active");
+});
+
+// **关键提示：**
+// 在实际项目中，登录和注册表单提交时，你需要阻止默认行为，并发送 AJAX 请求到后端。
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // 阻止表单默认提交
+    alert('🎉 登录成功! (此处应进行后端验证)');
+    // 可以在此添加加载动画或页面跳转逻辑
+});
+
+document.getElementById('register-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // 阻止表单默认提交
+    alert('🚀 注册成功! (此处应进行后端验证)');
+    // 注册成功后，可以自动切换回登录页面
+    // container.classList.remove("right-panel-active");
+});
+</script>

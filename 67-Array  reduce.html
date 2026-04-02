@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const arr=[1,2,3,4]
+    //1 没有初始值
+    // arr.reduce(function(prev,current)){return prev+current}
+    const total=arr.reduce(function(prev,current){
+      return prev+current
+    })
+     console.log(total);//10
+    //2 有初始值
+    const total1=arr.reduce(function(prev,current){
+      return prev+current
+    },10)
+     console.log(total1);//20 最后要加上初始值
+    // 3 箭头函数写法
+    const total2=arr.reduce((prev,current)=>prev+current,10)
+    console.log(total2);
+</script>
+</body>
+</html>

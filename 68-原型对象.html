@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 求最大值 
+    // 自定义方法写到 数组.prototype上
+    const arr=[1,2,3,4]
+    Array.prototype.max=function(){
+      // 展开运算符
+      return Math.max(...this)
+      // 原型函数中this指向实例对象
+      // 用this可不传参数  
+      // 若用...arr 则function(...arr)但未传参数会报错
+    }
+    console.log(arr.max());
+    
+    // 求最小值
+    Array.prototype.min=function(){
+      // 展开运算符
+      return Math.min(...this)
+    }
+    console.log(arr.min());
+
+    // 求和
+    Array.prototype.sum=function(){
+      // reduce方法  箭头函数
+      return this.reduce((prev,item)=> prev + item,0)
+    }
+    console.log(arr.sum());
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  .container {
+    /* 假设一些容器样式 */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .item {
+    /* 假设一些子元素样式 */
+    width: 100px;
+    height: 100px;
+    background-color: lightblue;
+    margin: 10px;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div v-slide-in v-for="n in 10" class="item">{{ n }}</div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const DISTANCE = 150;
+const DURATION = 500;
+const map = new WeakMap();
+
+const ob = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+        if (entry.isIntersecting) {
+            // 该元素和视口相交
+            // 播放该元素的动画
+            const animation = map.get(entry.target);
+            if (animation) {
+                animation.play();
+                ob.unobserve(entry.target);
+            }
+        }
+    }
+});
+
+function isBelowViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top - DISTANCE > window.innerHeight;
+}
+
+export default {
+    mounted(el) {
+        if (!isBelowViewport(el)) {
+            return;
+        }
+        const animation = el.animate([
+            // 这里动画关键帧未完整展示，假设从初始位置滑入
+            { transform: 'translateX(-100%)' }, 
+            { transform: 'translateX(0)' } 
+        ], {
+            duration: DURATION,
+            easing:'ease-in-out'
+        });
+        animation.pause();
+        ob.observe(el);
+        map.set(el, animation);
+    },
+    unmounted(el) {
+        ob.unobserve(el);
+    }
+};
+  </script>
+</body>
+</html>

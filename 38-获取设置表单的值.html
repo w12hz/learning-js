@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <input type="text" value="1"> -->
+   <input type="checkbox" name="" id="" checked>
+   <button >按钮</button>
+  <script>
+    // 1获取元素
+    // const uname=document.querySelector('input')
+    // 2获取值  获取表单里面的值用 表单.value
+    // console.log(uname.value) 电脑
+    // console.log(uname.innerHTML) 错误 innerHTML得不到表单的内容
+    // 3设置表单的值
+    // uname.value='2222'
+    // uname.type='password'
+
+    // 1获取
+    const ipt=document.querySelector('input')
+    ipt.checked=true
+    // ipt.checked='true'也可 有隐式转换 只有空字符串才是false
+    // 1获取
+    const button=document.querySelector('button')
+    console.log(button.disabled)//disabled 禁用吗  默认为false 不禁用
+    button.disabled=true//禁用 按钮
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let person={
+      age:18,
+      uname:'qqq',
+      gender:'女',
+      'xiaoming':'aa'
+    }
+    console.log(person.age)//查
+    person.age=20//改
+    console.log(person.age)
+    person.hobby='足球'//增
+    console.log(person.hobby)
+    delete person.age
+    console.log(person)
+    //查的另外一种方式:对象名['属性名'] 适用于属性名为字符串
+    console.log(person['xiaominmg'])
+ </script>
+</body>
+</html>

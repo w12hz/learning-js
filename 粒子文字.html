@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas 彩色粒子文字切换特效</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // 要显示的文字数组
+        const texts = ['3','2','1','晓霖','HAPPY BIRTHDAY!','生辰已至，新岁开篇','愿你如春日繁花','在岁月长河中自在绽放','邂逅无尽美好'];
+        let currentTextIndex = 0;
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function setupParticles(text) {
+            const color = getRandomColor();
+            ctx.font = '150px Arial';
+            ctx.fillStyle = color;
+            const textMetrics = ctx.measureText(text);
+            const textX = (canvas.width - textMetrics.width) / 2;
+            const textY = canvas.height / 2 + 50;
+
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            tempCtx.font = ctx.font;
+            tempCtx.fillStyle = color;
+            tempCtx.fillText(text, textX, textY);
+
+            const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+            const data = imageData.data;
+
+            const particles = [];
+            const particleSpacing = 5;
+
+            for (let y = 0; y < tempCanvas.height; y += particleSpacing) {
+                for (let x = 0; x < tempCanvas.width; x += particleSpacing) {
+                    const index = (y * tempCanvas.width + x) * 4;
+                    if (data[index + 3] > 0) {
+                        const particle = {
+                            x: x + Math.random() * 20 - 10,
+                            y: y + Math.random() * 20 - 10,
+                            targetX: x,
+                            targetY: y,
+                            vx: 0,
+                            vy: 0,
+                            isAtTarget: false,
+                            isWaitingToDisperse: false,
+                            waitStartTime: 0,
+                            color: color
+                        };
+                        particles.push(particle);
+                    }
+                }
+            }
+            return particles;
+        }
+
+        let particles = setupParticles(texts[currentTextIndex]);
+        let isAllParticlesAtTarget = false;
+        let allParticlesAtTargetStartTime = 0;
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            let allParticlesAtTarget = true;
+            particles.forEach(particle => {
+                if (!particle.isAtTarget) {
+                    const dx = particle.targetX - particle.x;
+                    const dy = particle.targetY - particle.y;
+                    const ax = dx * 0.05;
+                    const ay = dy * 0.05;
+                    particle.vx += ax;
+                    particle.vy += ay;
+                    particle.vx *= 0.9;
+                    particle.vy *= 0.9;
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+
+                    if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
+                        particle.isAtTarget = true;
+                        particle.isWaitingToDisperse = true;
+                        particle.waitStartTime = performance.now();
+                    } else {
+                        allParticlesAtTarget = false;
+                    }
+                } else if (particle.isWaitingToDisperse) {
+                    if (performance.now() - particle.waitStartTime >= 2000) {
+                        particle.isWaitingToDisperse = false;
+                        particle.vx = (Math.random() - 0.5) * 5;
+                        particle.vy = (Math.random() - 0.5) * 5;
+                    }
+                } else {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                }
+
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, 1, 0, Math.PI * 2);
+                ctx.fillStyle = particle.color;
+                ctx.fill();
+            });
+
+            if (allParticlesAtTarget) {
+                if (!isAllParticlesAtTarget) {
+                    isAllParticlesAtTarget = true;
+                    allParticlesAtTargetStartTime = performance.now();
+                } else if (performance.now() - allParticlesAtTargetStartTime >= 2500) {
+                    currentTextIndex = (currentTextIndex + 1) % texts.length;
+                    particles = setupParticles(texts[currentTextIndex]);
+                    isAllParticlesAtTarget = false;
+                }
+            } else {
+                isAllParticlesAtTarget = false;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>

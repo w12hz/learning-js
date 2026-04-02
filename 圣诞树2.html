@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圣诞树</title>
+    <style>
+        html,body{
+            margin: 0;
+            width:90%;
+            height: 85%;
+        }
+        #main{
+	position: absolute; 
+		top: 0; 
+		left: 0; 
+}
+        #video{
+            width:99%;
+            height:90%;
+        }
+        .hidden{
+            display:none;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="main">
+        <video id="video" muted="muted" autoplay="autoplay" loop="loop" src="AE.mp4">
+        </video>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function(){
+		var video = document.getElementById("video");
+        video.src = "";
+        video.play();
+    });
+</script>
+</html>
+

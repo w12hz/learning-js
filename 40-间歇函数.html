@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // setInterval(函数，间隔时间)间隔时间为毫秒  间歇函数开启后永不停歇
+    // 匿名函数
+   /* setInterval(function(){
+      console.log('一秒执行一次')
+    },1000)*/
+    // 有名函数 setInterval(函数名，间隔时间)函数名不要加小括号
+    function fn(){
+     console.log('一秒执行一次')
+    }
+    setInterval(fn,1000)//fn 后面不加括号
+// 关闭定时器
+let m=setInterval(fn,1000)
+clearInterval(m)
+  </script>
+</body>
+</html>

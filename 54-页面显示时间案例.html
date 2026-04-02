@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 300px;
+      height: 40px;
+      border: 1px solid #000;
+      text-align: center;
+      line-height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+
+  </div>
+  <script>
+    const div=document.querySelector('div')
+    function getmydata(){
+      const data= new Date ()
+      let h=data.getHours()
+      let m=data.getMinutes()
+      let s=data.getSeconds()
+      h = h < 10 ? '0' + h : h
+      m = m < 10 ? '0' + m : m
+      s = s < 10 ? '0' + s : s
+      return `今天是 ${data.getFullYear()}年${data.getMonth()}月${data.getDate()}号${h}:${m}:${s}`
+    }
+    //调用函数
+    div.innerHTML=getmydata()
+    //间歇函数
+    setInterval(function(){
+      div.innerHTML=getmydata()
+    },1000)
+  </script>
+</body>
+</html>

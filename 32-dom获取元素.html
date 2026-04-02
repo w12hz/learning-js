@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      color: aliceblue;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    q
+  </div>
+  <p id="nav">导航栏</p>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <script>
+    // 获取一个元素
+   const a = document.querySelector('div')
+   console.log(a)
+   const nav=document.querySelector('#nav')
+   console.log(nav)
+  const li=document.querySelector('ul li:first-child')
+  nav.style.color ='red'//可以以直接修改
+  console.log(li)
+  //获取多个元素
+  const lis =document.querySelectorAll('ul li')
+  console.log(lis)//伪数组 有长度有索引号 没有pop() push()等方法
+  //不能直接修改 只能通过遍历的方法一次给里面的元素做修改
+    for(let i=0;i<lis.length;i++){
+      console.log(lis[i])
+      lis[i].style.color='yellow'
+    }
+  </script>
+</body>
+</html>

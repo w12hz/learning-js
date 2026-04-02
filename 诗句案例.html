@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poem Boxes with Button Switch</title>
+    <style>
+        .poem {
+            height: 520px;
+            overflow: hidden;
+            white-space: nowrap;
+            display: none;
+        }
+        .poem.active {
+            display: block;
+        }
+        .poem .box1 {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 14px;
+            width: 325px;
+            height: 400px;
+            background-color: rgba(255, 255, 255, .3);
+            box-shadow: 5px 5px 5px 5px #0b662f;
+            border: 1px solid #b8b8b8;
+            border-radius: 10%;
+            transition: all .2s;
+            text-align: center;
+            line-height: 50px;
+            backdrop-filter: blur(500px);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="prevBtn">上一组</button>
+    <button id="nextBtn">下一组</button>
+    <div class="poem active">
+        <div class="box1">
+            <p>好雨知时节,</p>
+            <p>当春乃发生</p>
+        </div>
+        <div class="box1">
+            <p>随风潜入夜,</p>
+            <p>润物细无声</p>
+        </div>
+    </div>
+    <div class="poem">
+        <div class="box1">
+            <p>野径云俱黑,</p>
+            <p>江船火独明</p>
+        </div>
+        <div class="box1">
+            <p>晓看红湿处,</p>
+            <p>花重锦官城</p>
+        </div>
+    </div>
+    <script>
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const poems = document.querySelectorAll('.poem');
+        let currentIndex = 0;
+        function showPoem(index) {
+            poems.forEach((poem, i) => {
+                if (i === index) {
+                    poem.classList.add('active');
+                } else {
+                    poem.classList.remove('active');
+                }
+            });
+        }
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + poems.length) % poems.length;
+            showPoem(currentIndex);
+        });
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % poems.length;
+            showPoem(currentIndex);
+        });
+    </script>
+</body>
+</html>

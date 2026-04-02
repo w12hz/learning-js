@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poem Boxes with Button Switch, Scrollbar and Popup</title>
+    <style>
+        /* 诗框容器样式 */
+        .poem {
+            height: 520px;
+            overflow: auto;
+            white-space: nowrap;
+            display: none;
+        }
+        /* 自定义滚动条样式（可选） */
+        .poem::-webkit-scrollbar {
+            width: 10px;
+        }
+        .poem::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .poem::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+        .poem::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .poem.active {
+            display: block;
+        }
+        .poem .box1 {
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 14px;
+            width: 325px;
+            height: 400px;
+            background-color: rgba(255, 255, 255, .3);
+            box-shadow: 5px 5px 5px 5px #0b662f;
+            border: 1px solid #b8b8b8;
+            border-radius: 10%;
+            transition: all .2s;
+            text-align: center;
+            line-height: 50px;
+            backdrop-filter: blur(500px);
+        }
+        /* 按钮样式 */
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        /* 弹框样式 */
+        .bigpopup {
+            display: none;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-color: #45d48c;
+            z-index: 999;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            border-radius: 5%;
+            border: 2px solid #074a32;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background-color: rgba(194, 170, 170, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            /* 添加毛玻璃模糊效果 */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            /* 兼容 Safari 浏览器 */
+        }
+    </style>
+</head>
+<body>
+    <button id="prevBtn">上一组</button>
+    <button id="nextBtn">下一组</button>
+    <button id="openPopupBtn">打开弹框</button>
+    <div class="poem active">
+        <div class="box1">
+            <p>好雨知时节,</p>
+            <p>当春乃发生</p>
+        </div>
+        <div class="box1">
+            <p>随风潜入夜,</p>
+            <p>润物细无声</p>
+        </div>
+        <div class="box1">
+            <p>野径云俱黑,</p>
+            <p>江船火独明</p>
+        </div>
+        <div class="box1">
+            <p>晓看红湿处,</p>
+            <p>花重锦官城</p>
+        </div>
+    </div>
+    <div class="poem">
+        <div class="box1">
+            <p>两个黄鹂鸣翠柳,</p>
+            <p>一行白鹭上青天</p>
+        </div>
+        <div class="box1">
+            <p>窗含西岭千秋雪,</p>
+            <p>门泊东吴万里船</p>
+        </div>
+    </div>
+    <!-- 弹框相关元素 -->
+    <div class="bigpopup" id="bigpopup"></div>
+    <div class="popup" id="popup">
+        <p>这是弹框内容</p>
+        <button id="closePopupBtn">关闭弹框</button>
+    </div>
+    <script>
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const poems = document.querySelectorAll('.poem');
+        let currentIndex = 0;
+        function showPoem(index) {
+            poems.forEach((poem, i) => {
+                if (i === index) {
+                    poem.classList.add('active');
+                } else {
+                    poem.classList.remove('active');
+                }
+            });
+        }
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + poems.length) % poems.length;
+            showPoem(currentIndex);
+        });
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % poems.length;
+            showPoem(currentIndex);
+        });
+        // 弹框相关逻辑
+        const openPopupBtn = document.getElementById('openPopupBtn');
+        const closePopupBtn = document.getElementById('closePopupBtn');
+        const bigpopup = document.getElementById('bigpopup');
+        const popup = document.getElementById('popup');
+        openPopupBtn.addEventListener('click', () => {
+            bigpopup.style.display = 'block';
+            popup.style.display = 'flex';
+        });
+        closePopupBtn.addEventListener('click', () => {
+            bigpopup.style.display = 'none';
+            popup.style.display = 'none';
+        });
+    </script>
+</body>
+</html

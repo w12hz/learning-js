@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=
+  , initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log(/^1$/.test(1));//true  只能出现一个1  要想出现多个1要用量词
+    console.log(/^1$/.test(11));//false
+    console.log(/^1+$/.test(111));//true  +表示>=1
+    console.log(/^1+$/.test(121));//false 只能出现数字1不能出现其他数字
+    console.log(/^1*$/.test(''));//true  *表 >=0
+    
+
+
+    
+  </script>
+</body>
+</html>

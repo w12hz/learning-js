@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      height: 3000px;
+    }
+    div{
+      overflow: auto;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+    阿斯顿飞过啊速度非常v宝宝
+  </div>
+  <script>
+   window.addEventListener('scroll',function(){
+   //   alert('hi')
+  // 想知道页面滚动了多少像素，被卷去了多少
+  //获取html元素写法  document.documentElement
+  console.log(document.documentElement.scrollTop);
+  
+   })
+  //  scrollTop被卷去的头部 
+  
+  const div=document.querySelector('div')
+  div.addEventListener('scroll',function(){
+    console.log(div.scrollTop);
+  })
+ 
+ 
+  </script>
+</body>
+</html>

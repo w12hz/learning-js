@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <p>qwe</p>
+  <script>
+    //按照事件委托的方式，委托给父级，事件写道父级身上
+    //获得父元素
+    const ul=document.querySelector('ul')
+    ul.addEventListener('click',function(e){
+      //不能直接用this.style.color='red' 直接用则点击一个li，所有都变色，因为有父级委托事件
+      //e.target就是我们点击的对象
+      if(e.target.tagName==='LI'){
+        e.target.style.color='pink'//我们只有点击li才会有效果
+      }
+    })
+  </script>
+</body>
+</html>

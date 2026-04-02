@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>//左闭右开[0,1)Math.random()
+   //0~10之间的整数
+     console.log(Math.floor(Math.random()*11))
+    //  随机获取数组里的元素
+     let arr=['a','a','s','z','d']
+     let random=Math.floor(Math.random()*arr.length)
+    function getRandom(N,M){
+      return Math.floor(Math.random()*(M-N+1))+N
+    }
+    console.log(getRandom(2,8))
+    </script>
+
+</body>
+</html>

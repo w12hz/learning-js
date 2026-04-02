@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* 初始状态 */
+        .box {
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            margin: 50px auto;
+            border-radius: 8px;
+            opacity: 0; /* 初始透明 */
+            transform: translateY(50px); /* 初始位置下移 */
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 平滑过渡 */
+        }
+
+        /* 动画触发状态 */
+        .box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 增加间距便于观察 */
+        body {
+            min-height: 150vh;
+            padding: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 获取所有需要观察的元素
+            const boxes = document.querySelectorAll('.box');
+            
+            // 创建观察器实例
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // 当元素进入视口时添加可见类
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // 可选：动画完成后停止观察
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null, // 使用视口作为根
+                rootMargin: '0px',
+                threshold: 0.2 // 元素进入20%时触发
+            });
+
+            // 开始观察每个元素
+            boxes.forEach(box => observer.observe(box));
+        });
+    </script>
+</body>
+</html>

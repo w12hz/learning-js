@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      /* background-color: #837979; */
+      /* 设置 body 为弹性容器 */
+      display: flex;
+      /* 水平居中 */
+      justify-content: center;
+      /* 垂直居中 */
+      align-items: center;
+      /* 确保 body 占满整个视口高度 */
+      min-height: 100vh;
+      margin: 0;
+    }
+   
+    a{
+      position: relative;
+      /* padding: 20px 60px; */
+      display: flex;
+      text-decoration: none;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 70px;
+      top: 50%;
+      /* border: none; */
+      border-radius: 50px;
+      /* border: 1px solid #100e0e; */
+      font-family: 仿宋;
+      font-size: 2em;
+      transition: .5s;
+      overflow: hidden;
+      color: rgb(221, 186, 163);
+    }
+    a:hover{
+      color: rgb(225, 104, 128);
+      text-shadow: 0 0 15px  rgb(225, 104, 128);
+    }
+    a::before{
+      content: '';
+      position: absolute;
+     top: var(--y);
+     left: var(--x);
+      transform: translate(-50%,-50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(#e1677f,transparent,transparent);
+      opacity: 0;
+      transition: .5s opacity;
+    }
+    a:hover::before{
+      opacity: 1;
+     
+    }
+    a::after{
+      content: '';
+      background: linear-gradient(90deg,#ccddeb,#ebc9d9);
+      ;
+      position: absolute;
+      inset: 2px;
+      border-radius: 45px;
+    }
+    a span{
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+ <a href="#"><span>BUTTON</span></a>
+ <script>
+  let btns=document.querySelectorAll('a')
+  btns.forEach(btn=>{
+    btn.onmousemove=(e)=>{
+      let x=e.pageX-btn.offsetLeft
+      let y=e.pageY-btn.offsetTop
+      btn.style.setProperty('--x',x + 'px')
+      btn.style.setProperty('--y',y + 'px')
+    }
+  })
+ </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+      background: linear-gradient(to right,#b6d1e8,#ebd4ed,#c9e3ca);
+      min-height: 100vh;
+      display: flex;
+      /* 水平居中 */
+      justify-content: center;
+      /* 垂直居中 */
+      align-items: center;
+   } 
+    
+    .box{
+      display: flex;
+      /* margin-top: 500px; */
+     justify-content: center;
+     align-items: center;
+      
+    }
+    button{
+      width: 200px;
+      height: 70px;
+      font-size: 25px;
+      border-radius: 40px;
+      border: none;
+      color: #fefbfb;
+      background: linear-gradient(to right,#f5eca6,#ccddeb,#ebc9d9,#dee8ca,#dae6bb,#ccddeb,#f5eca6);
+      background-size: 800%;
+      z-index: 1;
+      /* border: 1px solid #264f71; */
+      }
+     
+      button:hover{
+        color: rgb(225, 104, 128);
+        text-shadow: 0 0 15px  rgb(225, 104, 128);
+        animation: animate 12s linear infinite;
+      }
+      @keyframes animate{
+        from{
+          background-position: 0%;
+        }
+        to{
+          background-position: 800%;
+        }
+      }
+      button::before{
+        content: '';
+        position: absolute;
+        z-index: -1;
+        background: linear-gradient(90deg,#f5eca6,#ccddeb,#ebc9d9,#dee8ca,#dae6bb,#ccddeb,#f5eca6);
+        background-size: 800%;
+        border-radius: 40px;
+       
+        opacity: 0;
+      }
+      button:hover::before{
+        filter: blur(20px);
+        opacity: 1;
+        z-index: 1;
+        animation: animate 8s linear infinite;
+      }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <button>B U T T O N</button>
+  </div>
+</body>
+</html>

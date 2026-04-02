@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>元素进入视口淡入效果</title>
+    <style>
+      .container {
+    width: 100%;
+    height: 150vh;
+    background-color: #f4f4f4;
+}
+
+.target-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+    width: 800px;
+    height: 100vh;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    line-height: 200px;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.fade-in.active {
+    opacity: 1;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="target-element fade-in">淡入的元素</div>
+        <div class="target-element fade-in">淡入的元素</div>
+        <div class="target-element fade-in">淡入的元素</div>
+        <div class="target-element fade-in">淡入的元素</div>
+    </div>
+    <script src="script.js"></script>
+    <script>const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+          }
+      });
+  });
+  
+  const targetElements = document.querySelectorAll(".fade-in");
+  targetElements.forEach((el) => observer.observe(el));</script>
+</body>
+
+</html>
